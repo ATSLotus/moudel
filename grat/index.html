@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="./two.js"></script>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+<script src="./grat.js"></script>
+<script src="./animate.js"></script>
+<script type="text/javascript">
+	let r = Math.PI/4;
+	let createTwo = function(){
+		var g = document.createElement("div");
+		var params = {
+			width:512,
+			height:512,
+			type:Two.Types.canvas
+		}
+		var two = new Two(params).appendTo(g);
+		document.getElementById('box').appendChild(g);
+		return [two,g];
+	}
+	let two,g;
+	let grat;
+    document.onkeydown=function(event){
+		var e = event || window.event || arguments.callee.caller.arguments[0];
+		if(e && e.keyCode==32){
+			[two,g]  = createTwo();
+			grat = drawGrating(two,g,0,0,512,512,r);
+		}
+		if(e && e.keyCode==13){
+			sport(two,grat,512,512,4,r);
+		}
+		if(e && e.keyCode==16){
+			two.unbind();
+		}
+		if(e && e.keyCode==8){
+			var box = document.querySelector("#box"); 
+        	var child = box.lastElementChild;  
+        	while (child) { 
+            	box.removeChild(child); 
+            	child = box.lastElementChild; 
+        	}
+		}
+	}
+</script>
+</html>
