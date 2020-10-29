@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="./two.js"></script>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+<script src="./graph.js"></script>
+<script src="./animate.js"></script>
+<script type="text/javascript">
+	var g = document.createElement("div");
+	var params = {
+		fullscreen:true,
+		type:Two.Types.canvas
+	}
+	var two = new Two(params).appendTo(g);
+	var id = drawRect(two,100,100,100,100,'red');
+    document.onkeydown=function(event){
+		var e = event || window.event || arguments.callee.caller.arguments[0];
+		if(e && e.keyCode==65){ 
+			sport(two,id);
+		}
+	}
+	document.getElementById('box').appendChild(g);
+</script>
+</html>
