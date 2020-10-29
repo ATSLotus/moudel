@@ -1,0 +1,58 @@
+<!-- 
+    使用two.js 绘制闪烁动画  图形引擎是 canvas
+    刷新时间：3帧
+    定时器：手写raf定时器
+    动画呈现方法：绘制两个rect,利用 two.js对象的remove()和add()实现
+-->
+ <!DOCTYPE html>
+ <html>
+ <head>
+ 	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 	<title>Testing Program</title>
+ 	<script src="./two.js"></script>
+ </head>
+ <body>
+ 	<div id="svgBoard"></div>
+ </body>
+ <script type="text/javascript">
+ 	let delayFrame = frameSet=> {
+        let frameCount=0;     
+        return new Promise(function (resolve, reject) {
+            (function raf(){
+                frameCount++;
+                let id =window.requestAnimationFrame(raf);
+            if( frameCount==(frameSet+1)){
+                window.cancelAnimationFrame(id);
+                resolve(0);
+            }
+        }())
+    })};
+    let svgBoard = document.querySelector('#svgBoard');
+    let params = {
+        fullscreen:true,
+        type:Two.Types.canvas
+    }
+    let two = new Two(params).appendTo(svgBoard);
+    let blackRect = two.makeRectangle(200,200,400,400);
+    let whiteRect = two.makeRectangle(200,200,400,400);
+    blackRect.fill='black';
+    whiteRect.fill='white';
+    two.remove(blackRect);
+    two.remove(whiteRect);
+    two.update();
+    (async function(){
+        do{
+            two.add(blackRect);
+            two.update();
+            await delayFrame(16);
+            two.remove(blackRect);
+            two.update();
+            two.add(whiteRect)
+            two.update();
+            await delayFrame(16);
+            two.remove(whiteRect);
+        }while(1)
+    }())
+ </script>
+ </html>

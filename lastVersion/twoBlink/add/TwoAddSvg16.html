@@ -1,0 +1,52 @@
+<!-- 
+    使用two.js 绘制闪烁动画  图形引擎是 webgl
+    刷新时间：3帧
+    定时器：two.js动画自带定时器
+    动画呈现方法：绘制两个rect,利用 two.js对象的remove()和add()实现
+ -->
+ <!DOCTYPE html>
+ <html>
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <script src="./two.js"></script>
+     <title>two.jsSvg时序测量程序</title>
+ </head>
+ <body>
+     <div id="svgBoard"></div>
+ </body>
+ <script type="text/javascript">
+     let svgBoard = document.querySelector('#svgBoard');
+     var params = {
+         fullscreen:true
+     }
+     let two = new Two(params).appendTo(svgBoard);
+
+     let blackRect = two.makeRectangle(200,200,400,400);
+     let whiteRect = two.makeRectangle(200,200,400,400);
+     blackRect.fill='black';
+     whiteRect.fill='white';
+
+     two.remove(blackRect);
+     two.remove(whiteRect);
+     two.update();
+     let status = 0;
+     two.bind('update',(frameCount)=>{
+         if(status<16){
+            two.remove(whiteRect);
+            two.remove(blackRect);
+            two.add(blackRect);
+            status++;
+         }else{
+            two.remove(blackRect);
+            two.remove(whiteRect);
+            two.remove(blackRect);
+            two.add(whiteRect);
+            status++;
+            if(status==32){
+                status=0;
+            }
+         }
+     }).play();
+ </script>
+ </html>

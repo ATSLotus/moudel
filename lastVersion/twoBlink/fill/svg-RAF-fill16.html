@@ -1,0 +1,50 @@
+<!-- 
+    使用two.js 绘制闪烁动画  图形引擎是 svg
+    刷新时间：3帧
+    定时器：个人手写raf定时器
+    动画呈现方法：绘制一个rect ,变换填充颜色
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./two.js"></script>
+    <title>two.jsSvg时序测量程序</title>
+</head>
+<body>
+    <div id="svgBoard"></div>
+</body>
+<script type="text/javascript">
+    var delay_frame = num1=> {
+        let time_num=0;     
+        return new Promise(function (resolve, reject) {
+            (function raf(){
+                time_num++;
+                let id =window.requestAnimationFrame(raf);
+            if( time_num==num1){
+                window.cancelAnimationFrame(id);
+                resolve(0);
+            }
+        }())
+    })};
+    let svgBoard = document.querySelector('#svgBoard');
+    var params = {
+        fullscreen:true
+    }
+    let two = new Two(params).appendTo(svgBoard);
+    
+    let Rect = two.makeRectangle(200,200,400,400);
+    (async function(){
+        do{
+        Rect.fill='black';
+        two.update();
+        await delay_frame(16);
+        Rect.fill='white';
+        two.update();
+        await delay_frame(16);
+    }while(1);
+    }())
+    
+</script>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>光栅</title>
+    <script src="./two.js"></script>
+</head>
+<body>
+    <div id="svg">
+       <div id="svgBoard" ></div>
+    </div>
+</body>
+<script type="text/javascript">
+
+    var delay_frame = num1=> {
+        let time_num=0;     
+        return new Promise(function (resolve, reject) {
+            (function raf(){
+                time_num++;
+                let id =window.requestAnimationFrame(raf);
+            if( time_num==num1){
+                window.cancelAnimationFrame(id);
+                resolve(0);
+            }
+        }())
+    })};
+
+    function translation(width,tf,w,e,frameA)
+    {
+    	e.translation.set(w,tf)
+        if(tf > -width)
+        {
+            tf -= frameA;
+        }
+        else
+        {
+            tf = 0;
+        }
+        return tf;
+    }
+
+    
+    function grating(x,y,width,height,frameA){
+
+        let svgBoard = document.getElementById('svgBoard');
+        let svg = document.getElementById('svg');
+
+        /*svg.style.border = '0px solid black';
+        svg.style.width = width + 'px';
+        svg.style.height = height + 'px';
+        svg.style.marginLeft = x + 'px';
+        svg.style.marginTop = y + 'px';
+        svg.style.borderRadius = '50%';
+        svg.style.position = 'absolute';
+        svg.style.overflow = 'hidden';
+
+        svgBoard.style.position = 'absolute';*/
+
+        /*svgBoard.style.marginLeft = x + 'px';
+        svgBoard.style.marginTop = y + 'px';*/
+
+        var params = {
+            //fullscreen:true,
+            width:width,
+            height:height,
+            type:Two.Types.canvas,
+            ratio:1
+        }
+        let two = new Two(params).appendTo(svgBoard);
+        let rect = new Array();
+
+        var R="FF";
+        var G="FF";
+        var B="FF";
+
+        for(var i=0;i < 2*height;i++){
+            // var start = new Date().getTime();
+            var k = 128+127*Math.cos(i/64*2*Math.PI+Math.PI/4);
+            var t = Math.round(k);
+            var z = t.toString(16);
+            if(t<16){
+                z="0"+z;
+            }
+            R=G=B=String(z);
+            //rect[i] = two.makeRectangle(0,i,width,1);
+            rect[i] = two.makeLine(-width/2,i,width/2,i);
+            //rect[i].fill = "#"+R+G+B;
+            rect[i].stroke = "#"+R+G+B;
+            rect[i].linewidth = 1;
+            //rect[i].noStroke();
+        }
+        //console.dir(rect);
+
+        let g = two.makeGroup(rect);
+        //console.dir(g);
+        g.translation.set(two.width/2,0);
+        //g.noStroke();
+        let tf = 0;
+        let w = two.width/2;
+        two.update();
+
+        /*(async function(){
+            do{
+            	tf = translation(width,tf,w,g,frameA);
+                await delay_frame(2);
+            	two.update();
+            }while(1)
+        }())*/
+    }
+
+    grating(100,100,512,512,4);
+
+//        two.update();
+</script>
+</html>
