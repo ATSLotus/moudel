@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script src="./keypress.js"></script>
+	<script src="./two.js"></script>
+	<script src="./app.js"></script>
+</head>
+<body>
+	<div id="box">
+	</div>
+</body>
+<script>
+	var arr = [0,1,2,3,4,5,6,7,8];	//样本图片
+	var arr0 = getArr(arr,5);		//从样本中抽取若干不同元素
+	console.dir(arr0);
+	var arr1 = [5,4,1,2,7];			//用户记忆图片
+	var k = new Array();			//用户记忆与抽取样本对比结果
+	k = judgeArr_snap(arr0,arr1);
+	console.dir(k);
+</script>
+</html>
