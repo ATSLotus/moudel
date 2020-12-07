@@ -1,0 +1,154 @@
+let Screen = function(DrawType,Argument){	//绘制函数
+	let graph = DrawType(Argument);
+	return graph;
+}
+
+let DrawDots = function(Argument){		//画点	若无color请用''或""
+	//Argument = [centerPoint,size,color]		
+	let index = 0;
+	let circle = new Array();
+	for(index = 0;Argument[4*index] != undefined;index++)
+	{
+		circle[index] = two.makeCircle(Argument[4*index],Argument[1+4*index],Argument[2+4*index]);
+		circle[index].fill = Argument[3+4*index];
+		circle[index].noStroke();
+	}
+	two.update();
+	return circle;
+}
+
+let DrawLine = function(Argument){		//画线	
+	//Argument = [[startPoint,endPoint],color,font]
+	let xy = Argument[0]
+	let line = two.makeLine(xy[0],xy[1],xy[2],xy[3]);
+	line.stroke = Argument[1];
+	line.linewidth = Argument[2];
+	two.update();
+	return line; 
+}
+
+let DrawLines = function(Argument){		//画多条线
+	//Argument = [[xy],color,font]		若无color或width请用''或""
+	let index = 0;
+	let line = new Array();
+	for(index = 0;Argument[3*index]!=undefined;index++)
+	{
+		let xy = Argument[3*index];
+		line[index] = two.makeLine(xy[0],xy[1],xy[2],xy[3]);
+		line[index].stroke = Argument[1+3*index];
+		line[index].linewidth = Argument[2+3*index];
+	}
+	two.update();
+	return line;
+}
+
+let LineStipple = function(Argument){		//画虚线
+	//Argument = [[x,y,length],interval,color,font]
+	let xy = Argument[0];
+	let n = Math.round(0.5*xy[2]/Argument[1]);
+	let stipple = new Array();
+	let index = 0;
+	for(index = 0;index < n;index++)
+	{
+		let x1 = xy[0]+Argument[1]*2*index
+		let x2 = xy[0]+Argument[1]*(2*index+1)
+		stipple[index] = two.makeLine(x1,xy[1],x2,xy[1]);
+		stipple[index].stroke = Argument[2];
+		stipple[index].linewidth = Argument[3];
+	}
+	console.dir(stipple);
+	two.update();
+	return stipple;
+}
+
+let DrawArc = function(Argument){			//画弧
+	//Argument = [ox,oy,r,sa,ea,font,color]		r为外径
+	let ir = Argument[2] - Argument[5];
+	let arc = two.makeArcSegment(Argument[0],Argument[1],ir,Argument[2],Argument[3],Argument[4]);
+	arc.fill = Argument[6];
+	arc.stroke = Argument[6];
+	two.update();
+	return arc;
+}
+
+let FillArc = function(Argument){			//画扇形
+	//Argument = [ox,oy,r,sa,ea,color]
+	let arc = two.makeArcSegment(Argument[0],Argument[1],0,Argument[2],Argument[3],Argument[4]);
+	arc.fill = Argument[5];
+	arc.stroke = Argument[5];
+	two.update();
+	return arc;
+}
+
+let FillRect = function(Argument){			//画实心矩形
+	//Argument = [rect,color]
+	let rect = Argument[0];
+	rect.fill = Argument[1];
+	two.update();
+	return rect;
+}
+
+let FrameRect = function(Argument){			//画空心矩形
+	//Argument = [center_x,center_y,width,height]
+	let rect = setRect(Argument[0],Argument[1],Argument[2],Argument[3])
+	return rect;
+}
+
+let FillOval = function(Argument){			//画椭圆
+	//Argument = [ellipse,color]
+	let ellipse = Argument[0];
+	ellipse.fill = Argument[1];
+	two.update();
+	return ellipse;
+}
+
+let FrameOval = function(Argument){			//画空心椭圆
+	//Argument = [[x,y,width,height],color]
+	let xy = Argument[0];
+	let ellipse = two.makeEllipse(xy[0],xy[1],xy[2],xy[3]);
+	ellipse.stroke = Argument[1];
+	two.update();
+	return ellipse;
+}
+
+let FrameTrangle = function(Argument){		//空心三角形
+	//Argument = [xy]	xy为三角形坐标点
+	let line = new Array();
+	line[0] = two.makeLine(Argument[0],Argument[1],Argument[2],Argument[3]);
+	line[1] = two.makeLine(Argument[0],Argument[1],Argument[4],Argument[5]);
+	line[2] = two.makeLine(Argument[4],Argument[5],Argument[2],Argument[3]);
+	two.update();
+	return trangle;
+}
+
+let FrameStar = function(Argument){			//星型
+	//Argument = [[ox,oy],or,ir,sides]
+	let xy = Argument[0];
+	let star = two.makeStar(xy[0],xy[1],Argument[1],Argument[2],Argument[3]);
+	two.update();
+	return star;
+}
+
+let FramePoly = function(Argument){			//画正多边形
+	//Argument = [[ox,oy],r,sides]
+	let xy = Argument[0];
+	let poly = two.makePolygon(xy[0],xy[1],Argument[1],Argument[2]);
+	two.update();
+	return poly;
+}
+
+let FillStar = function(Argument){			//填充星型
+	//Argument = [frameStar,color]
+	let star = Argument[0];
+	star.fill = Argument[1];
+	two.update();
+	return star;
+}
+
+let FillPoly = function(Argument){			//填充正多边形
+	//Argument = [framePoly,color]
+	let poly = Argument[0];
+	poly.fill = Argument[1];
+	two.update();
+	return poly;
+}
