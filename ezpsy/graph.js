@@ -152,3 +152,57 @@ let FillPoly = function(Argument){			//填充正多边形
 	two.update();
 	return poly;
 }
+
+let DrawText = function(Argument){			//绘制文本
+	//Argument = [string,[xy],[color,size,weight,textFont]]
+	let xy = Argument[1]
+	let sty = Argument[2];
+	let styles = {
+		family: sty[3],
+		fill : sty[0],
+		size: sty[1],
+		leading: 50,
+		weight: sty[2]
+	}
+	let text = two.makeText(Argument[0],xy[0],xy[1],styles);
+	two.update();
+	return text;
+}
+
+let CatStr = function(str){				//字符拼接
+	let index = 0;
+	let length = str.length;
+	let newstr = '';
+	for(index=0;index<length;index++)
+	{
+		newstr+=str[index];
+	}
+	return newstr;
+}
+
+let StrPad = function(str,number,str0){	//字符前填充
+	let index = 0;
+	let newstr = '';
+	for(index=0;index<number;index++)
+	{
+		newstr+=str0;
+	}
+	newstr+=str;
+	return newstr;
+}
+
+let Streq = function(str0,str1){	//字符串比较
+	if(str0 === str1)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+let Replace = function(str,str0,str1){	//字符替换
+	let newstr = str.replace(str0,str1);
+	return newstr;
+}
