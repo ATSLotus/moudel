@@ -206,3 +206,73 @@ let Replace = function(str,str0,str1){	//字符替换
 	let newstr = str.replace(str0,str1);
 	return newstr;
 }
+
+let Circle = function(Argument){			//画圆
+	//Argument = [[x,y,r],color]
+	let xy = Argument[0];
+	let circle = two.makeCircle(xy[0],xy[1],xy[2]);
+	circle.stroke = Argument[1];
+	two.update();
+	return circle;
+}
+
+let Ellipse = function(Argument){			//画椭圆
+	//Argument = [[x,y,width,height],color]
+	let xy = Argument[0];
+	let ellipse = two.makeEllipse(xy[0],xy[1],xy[2],xy[3]);
+	ellipse.stroke = Argument[1];
+	two.update();
+	return ellipse;
+}
+
+let drawCircle = function(id,x,y,width,height) {
+	let svg = id;
+	svg.style.border = '0px';
+	svg.style.width = width + 'px';
+	svg.style.height = height + 'px';
+	svg.style.marginLeft = x + 'px';
+	svg.style.marginTop = y + 'px';
+	svg.style.borderRadius = '50%';
+	svg.style.position = 'absolute';
+	svg.style.overflow = 'hidden';
+}
+
+let createGratTwo = function(width,height){ 		
+	let g = document.createElement("div");
+	let params = {
+		width:width,
+		height:height,
+		type:Two.Types.canvas
+	}
+	let two = new Two(params).appendTo(g);
+	document.body.appendChild(g);
+	return [two,g];
+}
+
+let Grat = function(x,y,width,height,r){		//创建光栅
+	let rect = new Array();
+	[two,g] = createGratTwo(width,height);
+	drawCircle(g,x,y,width,height);
+
+	var R="FF";
+	var G="FF";
+	var B="FF";
+
+	for(var i=0;i < 4*height;i++){
+		var k = 128+127*Math.cos(i/64*2*Math.PI+Math.PI/4);
+		var t = Math.round(k);
+		var z = t.toString(16);
+		if(t<16){
+			z="0"+z;
+		}
+		R=G=B=String(z);
+		rect[i] = two.makeRectangle(0,i-two.height/2,width,1);
+		rect[i].fill = "#"+R+G+B;
+		rect[i].stroke = "#"+R+G+B;
+	}
+	let group = two.makeGroup(rect);
+	group.translation.set(two.width/2,two.height/2);
+	group.rotation = r;
+	two.update(); 
+	return group;
+}

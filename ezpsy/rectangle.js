@@ -1,11 +1,11 @@
-let createTwo = function(){
+let createTwo = function(){ 
 	let g = document.createElement("div");
 	let params = {
 		fullscreen:true,
 		type:Two.Types.canvas
 	}
 	let two = new Two(params).appendTo(g);
-	document.getElementById('box').appendChild(g);
+	document.body.appendChild(g);
 	return [two,g];
 }
 
