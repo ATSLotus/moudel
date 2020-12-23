@@ -1,9 +1,9 @@
-let KbInit = function(){
+let KbInit = function(){            //初始化按键监听
     let listener = new window.keypress.Listener();
     return listener;
 }
 
-let KbWait = function(arg,fun,forWhat){
+let KbWait = function(arg,fun,forWhat){ //按键等待
     let listener = KbInit();
     let my_scope = this;
     let my_combos = listener.register_many([
@@ -27,7 +27,7 @@ let KbWait = function(arg,fun,forWhat){
     ]);
 }
 
-let ListenChar = function(arr,fun){
+let ListenChar = function(arr,fun){     //字符监听
     let listener = KbInit();
     listener.sequence_combo(arr, function() {
         lives = 30;
@@ -37,7 +37,7 @@ let ListenChar = function(arr,fun){
 
 
 
-let GetClick = function(e){
+let GetClick = function(e){         //获取鼠标状态
     e = e || window.event;
     if(e.pageX || e.pageY)
     {
@@ -47,7 +47,7 @@ let GetClick = function(e){
     Click(range,fun);     
 } 
 
-let Click = function(range,fun){   
+let Click = function(range,fun){        //等待鼠标点击
     //range = [xl,xr,yb,yt]
     console.dir(x+' '+y);
     if((x>=range[0]&&x<=range[1])&&(y>=range[2]&&y<=range[3]))

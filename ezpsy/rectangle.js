@@ -18,6 +18,7 @@ let RectCoordinate = function(rect){				//获取矩形参数
 }
 
 let SetRect = function(center_x,center_y,width,height){	//创建矩形
+	[two,g] = createTwo();
 	let newRect = two.makeRectangle(center_x,center_y,width,height);
 	two.update();
 	return newRect;
