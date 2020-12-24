@@ -1,170 +1,174 @@
-let Screen = function(DrawType,Argument){	//绘制函数
-	let graph = DrawType(Argument);
-	return graph;
-}
+// let Screen = function(DrawType,Argument){	//绘制函数
+// 	let graph = DrawType(Argument);
+// 	return graph;
+// }
 
-let DrawDots = function(Argument){		//画点	若无color请用''或""
-	//Argument = [centerPoint,size,color]		
+let DrawDots = function(centerPoint,size,color){		//画点	若无color请用''或""
+	[two,g] = createTwo();		
 	let index = 0;
 	let circle = new Array();
-	for(index = 0;Argument[4*index] != undefined;index++)
+	for(index = 0;centerPoint[index] != undefined;index++)
 	{
-		circle[index] = two.makeCircle(Argument[4*index],Argument[1+4*index],Argument[2+4*index]);
-		circle[index].fill = Argument[3+4*index];
+		circle[index] = two.makeCircle(centerPoint[index][0],centerPoint[index][1],size[index]);
+		circle[index].fill = color[index];
 		circle[index].noStroke();
 	}
 	two.update();
 	return circle;
 }
 
-let DrawLine = function(Argument){		//画线	
+let DrawLine = function(startPoint,endPoint,color,font){		//画线	
 	//Argument = [[startPoint,endPoint],color,font]
-	let xy = Argument[0]
-	let line = two.makeLine(xy[0],xy[1],xy[2],xy[3]);
-	line.stroke = Argument[1];
-	line.linewidth = Argument[2];
+	[two,g] = createTwo();
+	let line = two.makeLine(startPoint[0],startPoint[1],endPoint[0],endPoint[1]);
+	line.stroke = color;
+	line.linewidth = font;
 	two.update();
 	return line; 
 }
 
-let DrawLines = function(Argument){		//画多条线
+let DrawLines = function(xy,color,font){		//画多条线
 	//Argument = [[xy],color,font]		若无color或width请用''或""
+	[two,g] = createTwo();
 	let index = 0;
 	let line = new Array();
-	for(index = 0;Argument[3*index]!=undefined;index++)
+	for(index = 0;xy[index]!=undefined;index++)
 	{
-		let xy = Argument[3*index];
-		line[index] = two.makeLine(xy[0],xy[1],xy[2],xy[3]);
-		line[index].stroke = Argument[1+3*index];
-		line[index].linewidth = Argument[2+3*index];
+		line[index] = two.makeLine(xy[index][0],xy[index][1],xy[index][2],xy[index][3]);
+		line[index].stroke = color[index];
+		line[index].linewidth = font[index];
 	}
 	two.update();
 	return line;
 }
 
-let LineStipple = function(Argument){		//画虚线
+let LineStipple = function(x,y,length,interval,color,font){		//画虚线
 	//Argument = [[x,y,length],interval,color,font]
-	let xy = Argument[0];
-	let n = Math.round(0.5*xy[2]/Argument[1]);
+	[two,g] = createTwo();
+	let n = Math.round(0.5*length/interval);
 	let stipple = new Array();
 	let index = 0;
 	for(index = 0;index < n;index++)
 	{
-		let x1 = xy[0]+Argument[1]*2*index
-		let x2 = xy[0]+Argument[1]*(2*index+1)
-		stipple[index] = two.makeLine(x1,xy[1],x2,xy[1]);
-		stipple[index].stroke = Argument[2];
-		stipple[index].linewidth = Argument[3];
+		let x1 = x+interval*2*index
+		let x2 = x+interval*(2*index+1)
+		stipple[index] = two.makeLine(x1,y,x2,y);
+		stipple[index].stroke = color;
+		stipple[index].linewidth = font;
 	}
-	console.dir(stipple);
 	two.update();
 	return stipple;
 }
 
-let DrawArc = function(Argument){			//画弧
+let DrawArc = function(ox,oy,r,sa,ea,font,color){			//画弧
 	//Argument = [ox,oy,r,sa,ea,font,color]		r为外径
-	let ir = Argument[2] - Argument[5];
-	let arc = two.makeArcSegment(Argument[0],Argument[1],ir,Argument[2],Argument[3],Argument[4]);
-	arc.fill = Argument[6];
-	arc.stroke = Argument[6];
+	[two,g] = createTwo();
+	let ir = r - font;
+	let arc = two.makeArcSegment(ox,oy,ir,r,sa,ea);
+	arc.fill = color;
+	arc.stroke = color;
 	two.update();
 	return arc;
 }
 
-let FillArc = function(Argument){			//画扇形
+let FillArc = function(ox,oy,r,sa,ea,color){			//画扇形
 	//Argument = [ox,oy,r,sa,ea,color]
-	let arc = two.makeArcSegment(Argument[0],Argument[1],0,Argument[2],Argument[3],Argument[4]);
-	arc.fill = Argument[5];
-	arc.stroke = Argument[5];
+	[two,g] = createTwo();
+	let arc = two.makeArcSegment(ox,oy,0,r,sa,ea);
+	arc.fill = color;
+	arc.stroke = color;
 	two.update();
 	return arc;
 }
 
-let FillRect = function(Argument){			//画实心矩形
+let FillRect = function(center_x,center_y,width,height,color){			//画实心矩形
 	//Argument = [rect,color]
-	let rect = Argument[0];
-	rect.fill = Argument[1];
+	let rect = FrameRect(center_x,center_y,width,height);
+	rect.fill = color;
 	two.update();
 	return rect;
 }
 
-let FrameRect = function(Argument){			//画空心矩形
+let FrameRect = function(center_x,center_y,width,height){			//画空心矩形
 	//Argument = [center_x,center_y,width,height]
-	let rect = setRect(Argument[0],Argument[1],Argument[2],Argument[3])
-	return rect;
+	[two,g] = createTwo();
+	let newRect = two.makeRectangle(center_x,center_y,width,height);
+	two.update();
+	return newRect;
 }
 
-let FillOval = function(Argument){			//画椭圆
+let FillOval = function(x,y,width,height,color0,color1){			//画椭圆
 	//Argument = [ellipse,color]
-	let ellipse = Argument[0];
-	ellipse.fill = Argument[1];
+	let ellipse = FrameOval(x,y,width,height,color0);
+	ellipse.fill = color1;
 	two.update();
 	return ellipse;
 }
 
-let FrameOval = function(Argument){			//画空心椭圆
+let FrameOval = function(x,y,width,height,color){			//画空心椭圆
 	//Argument = [[x,y,width,height],color]
-	let xy = Argument[0];
-	let ellipse = two.makeEllipse(xy[0],xy[1],xy[2],xy[3]);
-	ellipse.stroke = Argument[1];
+	[two,g] = createTwo();
+	let ellipse = two.makeEllipse(x,y,width,height);
+	ellipse.stroke = color;
 	two.update();
 	return ellipse;
 }
 
-let FrameTrangle = function(Argument){		//空心三角形
+let FrameTrangle = function(x0,y0,x1,y1,x2,y2){		//空心三角形
 	//Argument = [xy]	xy为三角形坐标点
+	[two,g] = createTwo();
 	let line = new Array();
-	line[0] = two.makeLine(Argument[0],Argument[1],Argument[2],Argument[3]);
-	line[1] = two.makeLine(Argument[0],Argument[1],Argument[4],Argument[5]);
-	line[2] = two.makeLine(Argument[4],Argument[5],Argument[2],Argument[3]);
+	line[0] = two.makeLine(x0,y0,x1,y1);
+	line[1] = two.makeLine(x0,y0,x2,y2);
+	line[2] = two.makeLine(x2,y2,x1,y1);
+	let trangle = two.makeGroup(line);
 	two.update();
 	return trangle;
 }
 
-let FrameStar = function(Argument){			//星型
+let FrameStar = function(ox,oy,or,ir,sides){			//星型
 	//Argument = [[ox,oy],or,ir,sides]
-	let xy = Argument[0];
-	let star = two.makeStar(xy[0],xy[1],Argument[1],Argument[2],Argument[3]);
+	[two,g] = createTwo();
+	let star = two.makeStar(ox,oy,or,ir,sides);
 	two.update();
 	return star;
 }
 
-let FramePoly = function(Argument){			//画正多边形
+let FramePoly = function(ox,oy,r,sides){			//画正多边形
 	//Argument = [[ox,oy],r,sides]
-	let xy = Argument[0];
-	let poly = two.makePolygon(xy[0],xy[1],Argument[1],Argument[2]);
+	[two,g] = createTwo();
+	let poly = two.makePolygon(ox,oy,r,sides);
 	two.update();
 	return poly;
 }
 
-let FillStar = function(Argument){			//填充星型
+let FillStar = function(ox,oy,or,ir,sides,color){			//填充星型
 	//Argument = [frameStar,color]
-	let star = Argument[0];
-	star.fill = Argument[1];
+	let star = FrameStar(ox,oy,or,ir,sides);
+	star.fill = color;
 	two.update();
 	return star;
 }
 
-let FillPoly = function(Argument){			//填充正多边形
+let FillPoly = function(ox,oy,r,sides,color){			//填充正多边形
 	//Argument = [framePoly,color]
-	let poly = Argument[0];
-	poly.fill = Argument[1];
+	let poly = FramePoly(ox,oy,r,sides);
+	poly.fill = color;
 	two.update();
 	return poly;
 }
 
-let DrawText = function(Argument){			//绘制文本
+let DrawText = function(string,x,y,color,size,weight,textFont){			//绘制文本
 	//Argument = [string,[xy],[color,size,weight,textFont]]
-	let xy = Argument[1]
-	let sty = Argument[2];
+	[two,g] = createTwo();
 	let styles = {
-		family: sty[3],
-		fill : sty[0],
-		size: sty[1],
+		family: textFont,
+		fill : color,
+		size: size,
 		leading: 50,
-		weight: sty[2]
+		weight: weight
 	}
-	let text = two.makeText(Argument[0],xy[0],xy[1],styles);
+	let text = two.makeText(string,x,y,styles);
 	two.update();
 	return text;
 }
@@ -207,20 +211,20 @@ let Replace = function(str,str0,str1){	//字符替换
 	return newstr;
 }
 
-let Circle = function(Argument){			//画圆
+let Circle = function(x,y,r,color){			//画圆
 	//Argument = [[x,y,r],color]
-	let xy = Argument[0];
-	let circle = two.makeCircle(xy[0],xy[1],xy[2]);
-	circle.stroke = Argument[1];
+	[two,g] = createTwo();
+	let circle = two.makeCircle(x,y,r);
+	circle.stroke = color;
 	two.update();
 	return circle;
 }
 
-let Ellipse = function(Argument){			//画椭圆
+let Ellipse = function(x,y,width,height,color){			//画椭圆
 	//Argument = [[x,y,width,height],color]
-	let xy = Argument[0];
-	let ellipse = two.makeEllipse(xy[0],xy[1],xy[2],xy[3]);
-	ellipse.stroke = Argument[1];
+	[two,g] = createTwo();
+	let ellipse = two.makeEllipse(x,y,width,height);
+	ellipse.stroke =color;
 	two.update();
 	return ellipse;
 }
