@@ -1,0 +1,131 @@
+.main .header {
+  background-color: white;
+  display: flex;
+  justify-content: center; }
+  .main .header .logo {
+    width: 1000px;
+    height: 120px;
+    display: flex;
+    justify-content: space-between; }
+    .main .header .logo img {
+      width: 600px;
+      height: 120px; }
+    .main .header .logo .text_i {
+      width: 160px;
+      height: 26px;
+      margin-top: 47px; }
+    .main .header .logo .button_i {
+      width: 60px;
+      height: 30px;
+      margin-top: 45px; }
+.main .navBar {
+  background-color: #0A498D;
+  display: flex;
+  justify-content: center; }
+  .main .navBar .nav {
+    width: 1000px;
+    height: 40px;
+    display: flex;
+    justify-content: space-around; }
+.main .img0 {
+  width: 100%; }
+.main .centerbox {
+  display: flex;
+  justify-content: center; }
+  .main .centerbox .center {
+    width: 1000px;
+    height: 160px;
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid blue; }
+    .main .centerbox .center .c {
+      text-align: center; }
+  .main .centerbox .img1 {
+    width: 120px;
+    height: 120px; }
+.main .row {
+  display: flex;
+  justify-content: center; }
+  .main .row .row_kid {
+    width: 1000px;
+    height: 600px;
+    display: inline-flex;
+    justify-content: center; }
+.main .notice0 {
+  width: 450px;
+  height: 440px;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 20px; }
+.main .notice1 {
+  width: 550px;
+  height: 440px;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 20px; }
+.main .notice2 {
+  width: 350px;
+  height: 440px;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 20px; }
+.main .tt {
+  background-color: #EBF3FC;
+  border-top: 1px solid #0A498D;
+  height: 40px;
+  color: #0A498D;
+  font-family: "SimSun"; }
+  .main .tt .tit {
+    margin-top: 5px;
+    display: inline-block;
+    margin-left: 5px; }
+    .main .tt .tit .title {
+      width: 100px;
+      display: inline-block;
+      font-size: 20px;
+      height: 32px;
+      line-height: 32px;
+      padding-left: 15px;
+      text-align: left; }
+  .main .tt .more_btn0 {
+    margin-top: 5px;
+    display: inline-block;
+    font-size: 17px;
+    font-family: "SimSun";
+    color: #0A498D;
+    width: 297px;
+    text-align: right;
+    line-height: 32px; }
+  .main .tt .more_btn1 {
+    margin-top: 5px;
+    display: inline-block;
+    font-size: 17px;
+    font-family: "SimSun";
+    color: #0A498D;
+    width: 390px;
+    text-align: right;
+    line-height: 32px; }
+  .main .tt .more_btn2 {
+    margin-top: 5px;
+    display: inline-block;
+    font-size: 17px;
+    font-family: "SimSun";
+    color: #0A498D;
+    width: 184px;
+    text-align: right;
+    line-height: 32px; }
+.main .bottom {
+  border: 1px solid;
+  width: 100%;
+  height: 120px;
+  background-image: url("");
+  color: black;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; }
+  .main .bottom .f1 {
+    margin-top: 14px;
+    font-size: 20px; }
+
+/*# sourceMappingURL=style.css.map */
