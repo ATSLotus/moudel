@@ -1,3 +1,4 @@
+/*main*/
 .main .header {
   background-color: white;
   display: flex;
@@ -125,6 +126,162 @@
   flex-direction: column;
   justify-content: space-around; }
   .main .bottom .f1 {
+    margin-top: 14px;
+    font-size: 20px; }
+
+/*displayinfo*/
+.displayinfo .header {
+  background-color: white;
+  display: flex;
+  justify-content: center; }
+  .displayinfo .header .logo {
+    width: 1000px;
+    height: 120px;
+    display: flex;
+    justify-content: space-between; }
+    .displayinfo .header .logo img {
+      width: 600px;
+      height: 120px; }
+    .displayinfo .header .logo .text_i {
+      width: 160px;
+      height: 26px;
+      margin-top: 47px; }
+    .displayinfo .header .logo .button_i {
+      width: 60px;
+      height: 30px;
+      margin-top: 45px; }
+.displayinfo .navBar {
+  background-color: #0A498D;
+  display: flex;
+  justify-content: center; }
+  .displayinfo .navBar .nav {
+    width: 1000px;
+    height: 40px;
+    display: flex;
+    justify-content: space-around; }
+.displayinfo img {
+  width: 100%; }
+.displayinfo .articalBox {
+  display: flex;
+  justify-content: center; }
+  .displayinfo .articalBox .articalContent {
+    width: 1000px;
+    min-height: 1000px; }
+    .displayinfo .articalBox .articalContent .articalTitle {
+      text-align: center;
+      color: blue;
+      font-size: 30px; }
+    .displayinfo .articalBox .articalContent .text {
+      font-size: 18px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      padding-top: 10px;
+      border-top: 1px solid; }
+      .displayinfo .articalBox .articalContent .text .textCon0 {
+        margin-right: 20px; }
+      .displayinfo .articalBox .articalContent .text .textCon1 {
+        margin-left: 200px;
+        margin-right: 20px; }
+    .displayinfo .articalBox .articalContent .articalCon {
+      margin-top: 20px;
+      margin-left: 20px;
+      margin-right: 20px; }
+.displayinfo .bottom {
+  border: 1px solid;
+  width: 100%;
+  height: 120px;
+  background-image: url("");
+  color: black;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; }
+  .displayinfo .bottom .f1 {
+    margin-top: 14px;
+    font-size: 20px; }
+
+/*listcolumn*/
+.listcolumn .header {
+  background-color: white;
+  display: flex;
+  justify-content: center; }
+  .listcolumn .header .logo {
+    width: 1000px;
+    height: 120px;
+    display: flex;
+    justify-content: space-between; }
+    .listcolumn .header .logo img {
+      width: 600px;
+      height: 120px; }
+    .listcolumn .header .logo .text_i {
+      width: 160px;
+      height: 26px;
+      margin-top: 47px; }
+    .listcolumn .header .logo .button_i {
+      width: 60px;
+      height: 30px;
+      margin-top: 45px; }
+.listcolumn .listRow {
+  display: flex;
+  justify-content: center; }
+  .listcolumn .listRow .column {
+    width: 1000px;
+    min-height: 1000px;
+    display: flex;
+    justify-content: space-around; }
+    .listcolumn .listRow .column .column0 {
+      width: 250px;
+      margin-top: 20px; }
+      .listcolumn .listRow .column .column0 .listTitle {
+        width: 250px;
+        height: 60px;
+        line-height: 60px;
+        border: 1px solid #3d87cc;
+        background-color: #3d87cc;
+        color: white;
+        font-size: 30px;
+        text-align: center; }
+      .listcolumn .listRow .column .column0 .listCon {
+        margin-top: 20px;
+        background-color: #2066b0; }
+    .listcolumn .listRow .column .column1 {
+      margin-top: 20px;
+      margin-left: 50px; }
+      .listcolumn .listRow .column .column1 .listHeader {
+        display: flex;
+        justify-content: flex-start; }
+        .listcolumn .listRow .column .column1 .listHeader .listHeaderTitle {
+          width: 200px;
+          height: 60px;
+          border-bottom: 5px solid #0b59ad;
+          line-height: 60px;
+          text-align: center;
+          color: blue;
+          font-size: 24px; }
+        .listcolumn .listRow .column .column1 .listHeader .listHeaderPosition {
+          width: 500px;
+          height: 60px;
+          border-bottom: 5px solid #d0d0d0;
+          line-height: 60px;
+          padding-left: 30px;
+          color: #4272a7;
+          font-size: 20px; }
+      .listcolumn .listRow .column .column1 .listContent {
+        margin-top: 20px;
+        margin-left: 20px;
+        min-height: 980px; }
+.listcolumn .bottom {
+  border: 1px solid;
+  width: 100%;
+  height: 120px;
+  background-image: url("");
+  color: black;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; }
+  .listcolumn .bottom .f1 {
     margin-top: 14px;
     font-size: 20px; }
 
